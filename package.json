@@ -2,10 +2,10 @@
   "name": "json-server-api",
   "version": "1.0.0",
   "description": "Simple Fake API",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
-    "start": "json-server --watch ./database.json",
-    "start-serve": "node server.js"
+    "start-watch": "json-server --watch ./database.json",
+    "start": "node server.js"
   },
   "author": "ME:)",
   "license": "ISC",
