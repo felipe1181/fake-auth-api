@@ -2,6 +2,7 @@ const fs = require('fs')
 const bodyParser = require('body-parser')
 const jsonServer = require('json-server')
 const jwt = require('jsonwebtoken')
+require('dotenv').config();
 
 const server = jsonServer.create()
 const router = jsonServer.router('./database.json')
@@ -117,6 +118,6 @@ server.use(/^(?!\/auth).*$/,  (req, res, next) => {
 
 server.use(router)
 
-server.listen(8000, () => {
-  console.log('Run Auth API Server')
+server.listen(process.env.PORT, () => {
+  console.log(`Run Auth API Server ${process.env.PORT}`)
 })
