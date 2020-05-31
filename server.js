@@ -13,7 +13,7 @@ server.use(jsonServer.defaults());
 
 const SECRET_KEY = '123456789'
 
-const expiresIn = '1h'
+const expiresIn = '10h'
 
 // Create a token from a payload 
 function createToken(payload){
@@ -29,6 +29,13 @@ function verifyToken(token){
 function isAuthenticated({email, password}){
   return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
 }
+
+
+//welcome api
+server.get('/',(req,res)=>{
+  console.log('olá bem vindo!');
+  res.status(status).json({status:'bem vindo!',database:userdb})
+});
 
 // Register New User
 server.post('/auth/register', (req, res) => {
@@ -74,7 +81,6 @@ fs.readFile("./users.json", (err, data) => {
   console.log("Access Token:" + access_token);
   res.status(200).json({access_token})
 })
-
 // Login to one of the users from ./users.json
 server.post('/auth/login', (req, res) => {
   console.log("login endpoint called; request body:");
@@ -88,7 +94,7 @@ server.post('/auth/login', (req, res) => {
   }
   const access_token = createToken({email, password})
   console.log("Access Token:" + access_token);
-  res.status(200).json({access_token})
+  res.status(200).json({user:req.body, token:access_token})
 })
 
 server.use(/^(?!\/auth).*$/,  (req, res, next) => {
