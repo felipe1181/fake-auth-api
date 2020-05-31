@@ -28,14 +28,7 @@ function verifyToken(token){
 // Check if the user exists in database
 function isAuthenticated({email, password}){
   return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1
-}
-
-
-//welcome api
-server.get('/',(req,res)=>{
-  console.log('olá bem vindo!');
-  res.status(status).json({status:'bem vindo!',database:userdb})
-});
+} 
 
 // Register New User
 server.post('/auth/register', (req, res) => {
